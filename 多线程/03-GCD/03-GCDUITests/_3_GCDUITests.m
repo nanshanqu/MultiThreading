@@ -2,8 +2,8 @@
 //  _3_GCDUITests.m
 //  03-GCDUITests
 //
-//  Created by 李正林 on 2019/3/12.
-//  Copyright © 2019 李正林. All rights reserved.
+//  Created by Mac on 2020/4/15.
+//  Copyright © 2020 Mac. All rights reserved.
 //
 
 #import <XCTest/XCTest.h>
@@ -20,9 +20,6 @@
     // In UI tests it is usually best to stop immediately when a failure occurs.
     self.continueAfterFailure = NO;
 
-    // UI tests must launch the application that they test. Doing this in setup will make sure it happens for each test method.
-    [[[XCUIApplication alloc] init] launch];
-
     // In UI tests it’s important to set the initial state - such as interface orientation - required for your tests before they run. The setUp method is a good place to do this.
 }
 
@@ -31,8 +28,21 @@
 }
 
 - (void)testExample {
+    // UI tests must launch the application that they test.
+    XCUIApplication *app = [[XCUIApplication alloc] init];
+    [app launch];
+
     // Use recording to get started writing UI tests.
     // Use XCTAssert and related functions to verify your tests produce the correct results.
+}
+
+- (void)testLaunchPerformance {
+    if (@available(macOS 10.15, iOS 13.0, tvOS 13.0, *)) {
+        // This measures how long it takes to launch your application.
+        [self measureWithMetrics:@[XCTOSSignpostMetric.applicationLaunchMetric] block:^{
+            [[[XCUIApplication alloc] init] launch];
+        }];
+    }
 }
 
 @end
